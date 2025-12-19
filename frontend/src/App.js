@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
 import HomePage from './pages/HomePage';
 import CabinetListPage from './pages/CabinetListPage';
 import CabinetDetailPage from './pages/CabinetDetailPage';
@@ -38,7 +39,19 @@ function App() {
           <Route path="/cabinets" element={<CabinetListPage />} />
           <Route path="/cabinets/:id" element={<CabinetDetailPage />} />
           <Route path="/check/:id" element={<CheckPage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route
+            path="/admin"
+            element={
+              <>
+                <SignedIn>
+                  <AdminPage />
+                </SignedIn>
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              </>
+            }
+          />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
