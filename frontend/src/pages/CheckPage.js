@@ -12,6 +12,8 @@ const CheckPage = () => {
   const [missingTools, setMissingTools] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
+  const [cameraError, setCameraError] = useState(null);
+  const [cameraPermission, setCameraPermission] = useState(null);
   const webcamRef = useRef(null);
 
   useEffect(() => {
@@ -29,6 +31,21 @@ const CheckPage = () => {
 
     fetchCabinetDetails();
   }, [id]);
+
+  useEffect(() => {
+    const requestCameraPermission = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        setCameraPermission('granted');
+        stream.getTracks().forEach(track => track.stop());
+      } catch (error) {
+        setCameraPermission('denied');
+        setCameraError('Veuillez autoriser l\'accès à la caméra pour utiliser cette fonctionnalité.');
+      }
+    };
+
+    requestCameraPermission();
+  }, []);
 
   const captureImage = () => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -83,14 +100,46 @@ const CheckPage = () => {
                 <Typography variant="h6" gutterBottom>
                   Capture d'image
                 </Typography>
-                <Box sx={{ mb: 2 }}>
-                  <Webcam
-                    audio={false}
-                    ref={webcamRef}
-                    screenshotFormat="image/jpeg"
-                    width="100%"
-                  />
-                </Box>
+                {cameraPermission === 'denied' ? (
+                  <Box sx={{ mb: 2, p: 2, bgcolor: 'error.light', borderRadius: 1 }}>
+                    <Typography variant="body1" color="error">
+                      Accès à la caméra refusé
+                    </Typography>
+                    <Typography variant="body2" sx={{ mt: 1 }}>
+                      Veuillez autoriser l'accès à la caméra dans les paramètres de votre navigateur pour utiliser cette fonctionnalité.
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => window.location.reload()}
+                      sx={{ mt: 2 }}
+                    >
+                      Réessayer
+                    </Button>
+                  </Box>
+                ) : cameraPermission === null ? (
+                  <Box sx={{ mb: 2, p: 2, bgcolor: 'info.light', borderRadius: 1 }}>
+                    <Typography variant="body1" color="info.main">
+                      Demande d'accès à la caméra...
+                    </Typography>
+                    <Typography variant="body2" sx={{ mt: 1 }}>
+                      Veuillez autoriser l'accès à la caméra pour continuer.
+                    </Typography>
+                  </Box>
+                ) : (
+                  <Box sx={{ mb: 2 }}>
+                    <Webcam
+                      audio={false}
+                      ref={webcamRef}
+                      screenshotFormat="image/jpeg"
+                      width="100%"
+                      onUserMediaError={() => {
+                        setCameraPermission('denied');
+                        setCameraError('Impossible d\'accéder à la caméra. Veuillez vérifier les permissions.');
+                      }}
+                    />
+                  </Box>
+                )}
                 <Button
                   variant="contained"
                   color="primary"

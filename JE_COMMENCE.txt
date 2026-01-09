@@ -1,0 +1,199 @@
+================================================================================
+                    ARMOIRECHECK - PAR OU COMMENCER ?
+================================================================================
+
+Bienvenue ! Vous etes au bon endroit.
+
+================================================================================
+                        OPTION 1 - DEMARRAGE RAPIDE
+================================================================================
+
+Vous voulez l'application qui tourne MAINTENANT (5 minutes) ?
+
+==> Ouvrez: DEMARRAGE_RAPIDE.md
+
+Etapes:
+1. Creer compte Neon (2 min)
+2. Copier connection string (30 sec)
+3. Modifier backend/.env (30 sec)
+4. Executer scripts SQL (1 min)
+5. Demarrer l'app (1 min)
+
+================================================================================
+                    OPTION 2 - GUIDE DETAILLE AVEC AIDE
+================================================================================
+
+Vous preferez un guide pas-a-pas avec explications ?
+
+==> Ouvrez: GUIDE_NEON.md
+
+Contient:
+- Captures d'ecran
+- Explications detaillees
+- Solutions aux problemes
+- Conseils et astuces
+
+================================================================================
+                        CA NE FONCTIONNE PAS ?
+================================================================================
+
+L'application ne demarre pas ou erreur ?
+
+==> Ouvrez: SOLUTION_RAPIDE.md
+
+Vous y trouverez:
+- Diagnostic du probleme
+- 3 solutions (Docker/Neon/PostgreSQL)
+- Commandes exactes a executer
+
+Ou executez:
+node test-connection.js
+
+================================================================================
+                        TOUS LES GUIDES DISPONIBLES
+================================================================================
+
+Voir la liste complete de tous les guides:
+
+==> Ouvrez: GUIDES.md
+
+Contient l'index de TOUTE la documentation avec:
+- Guides de demarrage
+- Guides de depannage
+- Documentation technique
+- Outils et scripts
+
+================================================================================
+                        RECOMMENDATION PERSONNELLE
+================================================================================
+
+Pour 99% des utilisateurs, voici le meilleur parcours:
+
+1. Ouvrez DEMARRAGE_RAPIDE.md
+2. Suivez les 5 etapes
+3. Si probleme, consultez SOLUTION_RAPIDE.md
+4. Une fois l'app qui tourne, lisez APP_OVERVIEW.md pour comprendre
+
+C'est tout !
+
+================================================================================
+                        LIENS DIRECTS - FICHIERS
+================================================================================
+
+Dans le dossier ArmoireCheck/, ouvrez:
+
+  DEMARRAGE_RAPIDE.md ........ Installation en 5 minutes
+  GUIDE_NEON.md .............. Guide detaille Neon
+  SOLUTION_RAPIDE.md ......... Resoudre les problemes
+  START_HERE.md .............. Guide general
+  README.md .................. Documentation complete
+  GUIDES.md .................. Index de tous les guides
+
+================================================================================
+                    SCRIPTS DE DIAGNOSTIC DISPONIBLES
+================================================================================
+
+Dans un terminal, executez:
+
+  node test-connection.js .... Tester la connexion a la BDD
+  node check-installation.js . Verifier l'installation complete
+
+================================================================================
+                        AIDE SUPPLEMENTAIRE
+================================================================================
+
+Besoin d'aide ?
+
+1. Consultez TROUBLESHOOTING.md (problemes courants)
+2. Consultez la FAQ dans README.md
+3. Ouvrez une issue sur GitHub
+
+================================================================================
+                        QUELLE BASE DE DONNEES CHOISIR ?
+================================================================================
+
++------------------+------------+--------+----------------------+
+| Solution         | Difficulte | Temps  | Recommande pour      |
++------------------+------------+--------+----------------------+
+| Docker           | Facile     | 2 min  | Tout le monde        |
+| Neon (cloud)     | Moyen      | 5 min  | Production, demo     |
+| PostgreSQL local | Difficile  | 15 min | Developpement offline|
++------------------+------------+--------+----------------------+
+
+RECOMMANDATION: Utilisez Neon (cloud gratuit) - le plus simple sans Docker
+
+================================================================================
+                        PREMIERS COMPTES DE TEST
+================================================================================
+
+Une fois l'application demarree, connectez-vous avec:
+
+  URL:      http://localhost:3000
+  Username: admin
+  Password: admin123
+
+ou
+
+  Username: user1
+  Password: user123
+
+================================================================================
+                    VERIFIER QUE TOUT FONCTIONNE
+================================================================================
+
+Backend:
+  Ouvrir: http://localhost:5001/api/status
+  Devrait afficher: {"status":"OK","message":"Backend is running"}
+
+Frontend:
+  Ouvrir: http://localhost:3000
+  Devrait afficher la page d'accueil ArmoireCheck
+
+Base de donnees:
+  Executer: node test-connection.js
+  Devrait afficher: "Tous les tests ont reussi!"
+
+================================================================================
+                        PROCHAINES ETAPES
+================================================================================
+
+Apres installation reussie:
+
+1. Explorez l'interface (Dashboard, Cabinets, Admin)
+2. Testez la capture d'image avec votre webcam
+3. Ajoutez vos propres armoires
+4. Invitez votre equipe
+5. Lisez README.md pour personnaliser
+
+================================================================================
+                        QUESTION RAPIDE - REPONSE RAPIDE
+================================================================================
+
+Q: Par ou commencer ?
+R: Ouvrez DEMARRAGE_RAPIDE.md
+
+Q: Ca ne marche pas !
+R: Ouvrez SOLUTION_RAPIDE.md ou executez: node test-connection.js
+
+Q: Je veux tout comprendre
+R: Ouvrez README.md puis ARCHITECTURE.md
+
+Q: Liste de tous les guides ?
+R: Ouvrez GUIDES.md
+
+Q: Docker ou Neon ?
+R: Neon (plus simple, cloud gratuit, aucune installation)
+
+Q: Combien de temps ?
+R: 5 minutes avec DEMARRAGE_RAPIDE.md
+
+================================================================================
+
+            CONSEIL FINAL: Commencez par DEMARRAGE_RAPIDE.md !
+
+================================================================================
+
+Derniere mise a jour: 9 janvier 2026
+Version: 1.2.0
+
+Bon scan !

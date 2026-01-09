@@ -57,7 +57,7 @@ const Navbar = () => {
                     sx={{ width: 24, height: 24 }}
                   />
                   <Typography variant="body2">
-                    {user.fullName || user.emailAddresses[0]?.emailAddress || 'Utilisateur'}
+                    {user.primaryEmailAddress?.emailAddress || user.fullName || 'Utilisateur'}
                   </Typography>
                 </>
               ) : (
@@ -83,6 +83,9 @@ const Navbar = () => {
           <SignedOut>
             <Button color="inherit" component={Link} to="/login">
               Connexion
+            </Button>
+            <Button color="inherit" component={Link} to="/sign-up">
+              Inscription
             </Button>
           </SignedOut>
         </Box>

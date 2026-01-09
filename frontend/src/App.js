@@ -9,6 +9,7 @@ import CabinetDetailPage from './pages/CabinetDetailPage';
 import CheckPage from './pages/CheckPage';
 import AdminPage from './pages/AdminPage';
 import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
 import Navbar from './components/Navbar';
 
 const theme = createTheme({
@@ -53,6 +54,7 @@ function App() {
             }
           />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

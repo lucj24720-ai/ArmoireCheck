@@ -1,0 +1,90 @@
+================================================================================
+                    SCRIPTS SQL A EXECUTER DANS NEON
+================================================================================
+
+IMPORTANT: Executez ces scripts dans l'ordre!
+
+================================================================================
+                        ETAPE 1: OUVRIR NEON SQL EDITOR
+================================================================================
+
+1. Aller sur: https://neon.tech
+2. Se connecter
+3. Cliquer sur votre projet
+4. Cliquer sur "SQL Editor" (menu gauche)
+
+================================================================================
+                        ETAPE 2: EXECUTER init.sql
+================================================================================
+
+Dans le SQL Editor Neon:
+
+1. Copier TOUT le contenu du fichier:
+   backend/database/init.sql
+
+2. Coller dans le SQL Editor
+
+3. Cliquer sur "Run" (ou Ctrl+Enter)
+
+4. Attendre le message:
+   "Base de données ArmoireCheck initialisée avec succès"
+
+================================================================================
+                        ETAPE 3: EXECUTER seed.sql
+================================================================================
+
+Dans le SQL Editor Neon:
+
+1. EFFACER le contenu precedent (Ctrl+A puis Suppr)
+
+2. Copier TOUT le contenu du fichier:
+   backend/database/seed.sql
+
+3. Coller dans le SQL Editor
+
+4. Cliquer sur "Run"
+
+5. Attendre le message:
+   "Données de test insérées avec succès"
+
+================================================================================
+                        ETAPE 4: VERIFIER
+================================================================================
+
+Dans le SQL Editor, executez cette requete:
+
+SELECT 'users' as table_name, COUNT(*) as count FROM users
+UNION ALL
+SELECT 'cabinets', COUNT(*) FROM cabinets
+UNION ALL
+SELECT 'tools', COUNT(*) FROM tools;
+
+Resultat attendu:
+  users    | 3
+  cabinets | 3
+  tools    | 21
+
+================================================================================
+                        ETAPE 5: DEMARRER L'APPLICATION
+================================================================================
+
+Terminal 1 - Backend:
+  cd ArmoireCheck/backend
+  npm run dev
+
+Terminal 2 - Frontend:
+  cd ArmoireCheck/frontend
+  npm start
+
+Ouvrir: http://localhost:3000
+Login: admin / admin123
+
+================================================================================
+                        C'EST TOUT !
+================================================================================
+
+Duree totale: 2-3 minutes
+
+Si probleme, voir: ETAPE_SUIVANTE_NEON.md
+
+================================================================================

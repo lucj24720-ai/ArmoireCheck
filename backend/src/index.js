@@ -4,14 +4,26 @@ const dotenv = require('dotenv');
 const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { errorHandler, notFoundHandler, asyncHandler, ErrorTypes } = require('./middleware/errorHandler');
+const { logger, requestLogger, errorLogger } = require('./middleware/logger');
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Middlewares de base
 app.use(cors());
 app.use(express.json());
+
+// Middleware de logging
+app.use(requestLogger);
+
+// Log du démarrage
+logger.info('Starting ArmoireCheck Backend', {
+  port,
+  nodeEnv: process.env.NODE_ENV || 'development'
+});
 
 // Secret key for JWT
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-here';
@@ -490,8 +502,36 @@ app.get('/api/checks/:id', checkDatabaseConnection, authenticate, async (req, re
   }
 });
 
+// Middleware de gestion des routes non trouvées (doit être avant errorHandler)
+app.use(notFoundHandler);
+
+// Middleware de logging des erreurs
+app.use(errorLogger);
+
+// Middleware de gestion des erreurs (doit être le dernier)
+app.use(errorHandler);
+
+// Gestion des erreurs non capturées
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error('Unhandled Rejection', {
+    reason: reason,
+    promise: promise
+  });
+});
+
+process.on('uncaughtException', (error) => {
+  logger.error('Uncaught Exception', {
+    error: error.message,
+    stack: error.stack
+  });
+
+  // Arrêt gracieux
+  process.exit(1);
+});
+
 // Démarrer le serveur
 app.listen(port, () => {
+  logger.info(`Server running on port ${port}`);
   console.log(`Server running on port ${port}`);
 });
 
